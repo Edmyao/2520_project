@@ -1,7 +1,7 @@
 // This code finds Starbuckses nearby
 
 const request = require('request');
-
+var list_of_places=[];
 var get_sturbuckses = (callback) => {
 	return new Promise((resolve, reject) => {
 		request({
@@ -9,7 +9,7 @@ var get_sturbuckses = (callback) => {
 			json: true
 
 		}, (error, response, body) => {
-			list_of_places=[];
+			
 			if(error){
 				reject('Can not connect to Maps');
 			}
@@ -17,23 +17,18 @@ var get_sturbuckses = (callback) => {
 				for(place in body.results){
 					list_of_places.push(body.results[place].vicinity);
 				}
-				resolve(list_of_places);
+				resolve({body,list_of_places});
 			}
 		});
 	});
 };
 
-get_sturbuckses().then((response) => {
-	console.log(response);
-}).catch((error) => {
-	console.log("Error ",error);
-})
+module.exports ={
+	get_sturbuckses
+};
 
-// get_sturbuckses((error,response) => {
-// 	if(error){
-// 		console.log(error);
-// 	}
-// 	else{
-// 		console.log(response);
-// 	}
+// get_sturbuckses().then((response) => {
+// 	console.log(response);
+// }).catch((error) => {
+// 	console.log("Error ",error);
 // })
