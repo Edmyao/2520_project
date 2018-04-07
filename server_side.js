@@ -15,11 +15,6 @@ app.get('/map',(request,response) => {
 
 maps.get_sturbuckses().then((response) => {
 	console.log(response.list_of_places);
-	var json_file = JSON.stringify(response.body)
-	fs.appendFile('sturbucks.json', json_file);
-	// hbs.registerHelper('JSON_Starbucks',() => {
-	// 	return response.body;
-	// })
 }).catch((error) => {
 	console.log("Error ",error);
 })

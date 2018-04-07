@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Web-App</title>
+        <link href="style.css" rel="stylesheet" type="text/css"/>
+        <style>
+                #createacc{
+            position: absolute;
+            height:20%;
+            width:20%;
+            border: 2px solid black;
+            border-radius: 5px;
+            top:10%;
+            background-color: grey;
+            display:none;
+        }
+        #submitbutton{
+            position: absolute;
+            bottom:35px;
+            left:100px;
+        }
+        #newpw{
+            position: absolute;
+            left:69px;
+            top:21px;
+        }
+        #confirmpw{
+            position: absolute;
+            left:69px;
+            top:42px;
+        }
+        #confirmtitle{
+            position: absolute;
+            left:0px;
+            top:42px;
+        }
+        #npasslabel{
+            position: absolute;
+            top:21px;
+            left:0px;
+        }
+    </style>
+    
+    
+    
+    </head>
+    <body background='background1.jpg'>
+        <div id="loginbox">
+            <div id=logintitle>Welcome</div>
+            <img id="starbucks" src="starbucks.png">
+            <div id='loginout'>
+                <form action='/loginconfirm' method='post'>
+                    Username<br>
+                    <input type="text" id='userlogin' name="username" placeholder="Enter your username">
+                    <br>
+                    Password<br>
+                    <input type="password" id='passwordlogin' name="password" placeholder="Enter your password">
+                    <br><br>
+                    <button type="login" id='login'>Login</button>
+                </form>
+                <button type="account" id='create'>Create Account</button>
+            </div>
+        </div>
+        <div id="createacc">
+            <form action='/' method='post'>
+                <label for="NewUser">Username</label>
+                <input class='inputs' type="text" name="NewUser" id='newuser' placeholder="enter your username">
+                <label for="NewPassword" id='npasslabel'>Password</label>
+                <input class='inputs' type="password" name="NewPassword" id='newpw' placeholder="enter your password">
+                <label id='confirmtitle' for="confirmp">Confirm P</label>
+                <input class='inputs' type="password" name="confirmp" id='confirmpw' placeholder="confirm your password">
+                <input type="submit" value="Submit" id='submitbutton'>
+            <form>
+        </div>
+<!--
+        <div id='mainpage'>
+            <div id="savedtitle">Saved Location</div>
+            <button type="saved" id="savedlocation">Saved Locations</button>
+            <button type="search" id="location">Locations</button>
+            <img id="x" src=X.png>
+        </div>
+        <div id='mainpage2'>
+            <div id="locationtitle">Location</div>
+            <button type="saved" id="savedlocation">Saved Locations</button>
+            <button type="search" id="location">Locations</button>
+            <img id="x" src=X.png>
+        </div>
+-->
+
+        <script src="myjs.js"></script>
+    </body>
+
+
+
+</html>
