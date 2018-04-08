@@ -2,10 +2,34 @@
 
 const request = require('request');
 var list_of_places=[];
-var get_sturbuckses = (callback) => {
+
+var request_coodrs = () => {
+	return new Promise((resolve,reject) => {
+		request({
+			url: 'http://freegeoip.net/json'
+		}, (error, response, body)=> {
+			if(error){
+				reject('Cannot connect')
+			}
+			else{
+				resolve(body);
+			}
+		})
+	})
+}
+
+
+// request_coodrs().then((response) => {
+// 	lat = response.latitude;
+// 	lng = response.longitude;
+// }).catch((error) => {
+// 	console.log('Error: ',error);
+// })
+
+var get_sturbuckses = (lat,lng) => {
 	return new Promise((resolve, reject) => {
 		request({
-			url: 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=49.2827291,-123.1207375&radius=1000&type=coffee&keyword=starbucks&key=AIzaSyD5Z4W9aUlSBLzI4mNzhc4Rl9iqZkqSKMc',
+			url: `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat},${lng}&radius=5000&type=coffee&keyword=starbucks&key=AIzaSyD5Z4W9aUlSBLzI4mNzhc4Rl9iqZkqSKMc`,
 			json: true
 
 		}, (error, response, body) => {
@@ -23,8 +47,11 @@ var get_sturbuckses = (callback) => {
 	});
 };
 
+
+
 module.exports ={
-	get_sturbuckses
+	get_sturbuckses,
+	request_coodrs
 };
 
 // get_sturbuckses().then((response) => {

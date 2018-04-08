@@ -13,11 +13,35 @@ app.get('/map',(request,response) => {
     })
 })
 
-maps.get_sturbuckses().then((response) => {
+// maps.request_coodrs().then((response) => {
+//     //console.log(response);
+//     return maps.get_sturbuckses(response.latitude,response.longtitude).then((response) => {
+//     console.log(response.list_of_places);
+//     })
+// }).catch((error) => {
+//     console.log('Error',error);
+// })
+
+// maps.get_sturbuckses(49.264,-122.9369).then((response) => {
+//     console.log(response.list_of_places);
+// }).catch((error) => {
+//     console.log("Error ",error);
+// })
+
+maps.request_coodrs().then((response) => {
+    console.log(response);
+    location = JSON.parse(response);
+    return maps.get_sturbuckses(location.latitude,location.longitude);
+}, (errorMessage) => {
+    console.log(errorMessage);
+}).then((response) => {
+    //console.log(response2);
     console.log(response.list_of_places);
 }).catch((error) => {
     console.log("Error ",error);
 })
+
+
 
 
 // ////////////////////////////////////////////////////////////

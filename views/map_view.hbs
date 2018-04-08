@@ -1,3 +1,64 @@
+<!-- <html>
+  <head>
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    
+    <script>
+      var map;
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 2,
+          center: new google.maps.LatLng(2.8,-187.3),
+          mapTypeId: 'terrain'
+        });
+
+        // Create a <script> tag and set the USGS URL as the source.
+        var script = document.createElement('script');
+        console.log('Start the script');
+        //script.src = '/sturbucks';
+        script.src = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=49.2827291,-123.1207375&radius=1000&type=coffee&keyword=starbucks&key=AIzaSyD5Z4W9aUlSBLzI4mNzhc4Rl9iqZkqSKMc'
+        document.getElementsByTagName('head')[0].appendChild(script);
+        console.log('I reaches');
+        console.log(script.src);
+      }
+
+      // Loop through the results array and place a marker for each
+      // set of coordinates.
+      window.eqfeed_callback = function(results) {
+        console.log('results');
+        console.log(results);
+        json_results = JSON.parse(results)
+        for (item in json_results.results) {
+          var coords = json_results.results[item].geometry.coordinates;
+          var latLng = new google.maps.LatLng(coords[1],coords[0]);
+          var marker = new google.maps.Marker({
+            position: latLng,
+            map: map
+          });        
+        }
+      }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDrkIopyh3b866b5HgCZpRGT2CXlBGny_M&callback=initMap">
+    </script>
+  </body>
+</html> -->
+
+<!DOCTYPE html>
 <html>
   <head>
     <style>
@@ -27,20 +88,20 @@
 
         // Create a <script> tag and set the USGS URL as the source.
         var script = document.createElement('script');
-        console.log('Start the script');
-        script.src = 'http://maps.googleapis.com/maps/api/geocode/json?address=vancouver'
+        // This example uses a local copy of the GeoJSON stored at
+        //script.src=' http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_week.geojsonp'
+        script.src = 'https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=49.2827291,-123.1207375&radius=1000&type=coffee&keyword=starbucks&key=AIzaSyD5Z4W9aUlSBLzI4mNzhc4Rl9iqZkqSKMc';
         document.getElementsByTagName('head')[0].appendChild(script);
+        console.log(script.src);
       }
 
       // Loop through the results array and place a marker for each
       // set of coordinates.
-      window.eqfeed_callback = function(results) {
+      window.callback = function(results) {
+        console.log(results);
         for (var i = 0; i < results.features.length; i++) {
-          var coords = results.features[i].geometry.location;
-          console.log(coords);
-          var latLng = new google.maps.LatLng(coords.lat,coords.lng);
-          console.log(coords);
-          console.log(latLng);
+          var coords = results.features[i].geometry.coordinates;
+          var latLng = new google.maps.LatLng(coords[1],coords[0]);
           var marker = new google.maps.Marker({
             position: latLng,
             map: map
@@ -52,4 +113,4 @@
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDrkIopyh3b866b5HgCZpRGT2CXlBGny_M&callback=initMap">
     </script>
   </body>
-</html>S
+</html>
