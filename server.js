@@ -37,6 +37,10 @@ maps.request_coodrs().then((response) => {
 }).then((response) => {
     //console.log(response2);
     console.log(response.list_of_places);
+    place_list = response.list_of_places
+    hbs.registerHelper('closest_place',() => {
+        return place_list[0];
+    });
 }).catch((error) => {
     console.log("Error ",error);
 })
