@@ -12,6 +12,8 @@ var LoginInput = document.getElementById(LoginInput),
 
 var Accs = []
 
+var Logged_in = ""
+
 var LoadAccfile = () => {
     Accs = ReadAccfile('accounts.json')
 };
