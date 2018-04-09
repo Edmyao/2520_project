@@ -18,6 +18,7 @@ var place = '';
 var logged_in = ""
 var current_long = ''
 var current_lat = ''
+var last_save = ""
 
 
 var LoadAccfile = () => {
@@ -114,7 +115,7 @@ app.post('/login', (request, response) => {
 
 app.post('/home', (request, response) => {
     AddUsr(request, response);
-});
+}); 
 
 app.post('/loginsearch', (request, response) => {
     place = request.body.search
@@ -124,11 +125,12 @@ app.post('/loginsearch', (request, response) => {
             console.log(response1.list_of_places);
             displayText = '<ul>'
             for (var i = 0; i < maps.listofmaps.length; i++) {
-                displayText += `<li><a href="#" onclick="saveList(\' ${maps.listofmaps[i]} \')"> ${maps.listofmaps[i]}</a></li>`
+                displayText += `<li><a href="#" onclick="getMap(\'${maps.listofmaps[i]}\'); currentSB=\'${maps.listofmaps[i]}\'"> ${maps.listofmaps[i]}</a></li>`
             }
             displayText += '</ul>'
             response.render('index2.hbs', {
-                testvar: displayText
+                testvar: displayText,
+                coord: `<script>latitude = ${coordinates.lat}; longitude = ${coordinates.long};defMap()</script>`
             })
         }).catch((error) => {
             console.log("Error ", error);
@@ -136,26 +138,39 @@ app.post('/loginsearch', (request, response) => {
     })
 })
 
-app.post('/storeuserdata', (request, response) => {
+app.post('/getLocation', (request, response) => {
     place = request.body.location
     maps.getAddress(place).then((coordinates) => {
         console.log(coordinates.lat, coordinates.long);
         response.send(coordinates)
-        // console.log(current_lat);
     })
 })
 
-// app.post('/storeuserdata', (request, response) => {
-// 	let account = JSON.parse(fs.readFileSync('accounts.json'));
-// 	for (var i = 0; i < account.length; i++) {
-// 		if (logged_in.user == account[i].user) {
-// 			account[i].saved.push(request.body.location)
-// 		}
-// 	}
-//     console.log(account);
-// 	fs.writeFileSync('accounts.json', JSON.stringify(account));
-// 	response.send('OK')
-// })
+app.post('/storeuserdata', (request, response) => {
+	let account = JSON.parse(fs.readFileSync('accounts.json'));
+	for (var i = 0; i < account.length; i++) {
+		if (logged_in.user == account[i].user) {
+            console.log('push list');
+			account[i].saved.push(request.body.location)
+            last_save = request.body.location
+		}
+	}
+    console.log(account);
+	fs.writeFileSync('accounts.json', JSON.stringify(account));
+})
+
+app.post('/favdata', (request, response) => {
+    displaySaved = '<ul>'
+    for (var i = 0; i < logged_in.saved.length; i++) {
+    	console.log(logged_in.saved[i]);
+        displaySaved += `<li><a href="#" onclick="getMap(${logged_in.saved[i]})"> ${logged_in.saved[i]}</a></li>`
+    }
+    displaySaved += `<li><a href="#" onclick="getMap(${last_save})"> ${last_save}</a></li>`
+    displaySaved += '</ul>'
+	response.render('index2.hbs', {
+        savedSpots: displaySaved
+    })
+})
 
 app.get('/404', (request, response) => {
     response.send({

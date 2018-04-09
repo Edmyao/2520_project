@@ -104,17 +104,6 @@
     background-color: white;
     display:none;
 }
-#nearme{
-    top:0px;
-    left:0px;
-    position: absolute;
-    height:90%;
-    width:25%;
-    background-color: aquamarine;
-    border: 2px solid black;
-    border-radius: 5px;
-    overflow:hidden;
-}
 #searchbox {
     position: relative;
     background: #fff;
@@ -178,4 +167,98 @@
     position: absolute;
     top:21px;
     left:0px;
+}
+#newmap{
+    position: absolute;
+    height:60%;
+    width:50%;
+    top:0px;
+    bottom:0px;
+    margin:auto;
+    left:38%;
+    background-color: black;
+}
+
+#createacc{
+    position: absolute;
+    height:20%;
+    width:20%;
+    border: 2px solid black;
+    border-radius: 5px;
+    top:10%;
+    background-color: grey;
+    display:none;
+}
+#submitbutton{
+    position: absolute;
+    bottom:35px;
+    left:100px;
+}
+#newpw{
+    position: absolute;
+    left:69px;
+    top:21px;
+}
+#confirmpw{
+    position: absolute;
+    left:69px;
+    top:42px;
+}
+#confirmtitle{
+    position: absolute;
+    left:0px;
+    top:42px;
+}
+#npasslabel{
+    position: absolute;
+    top:21px;
+    left:0px;
+}
+#Searchlocation{
+    position: fixed;
+    bottom:0px;
+    left:0px;
+}
+#savedlocations{
+    position: fixed;
+    bottom:0px;
+    left:7%;
+}
+#savedloc{
+    top:0%;
+    left:0px;
+    position: absolute;
+    height:0%;
+    width:25%;
+    background-color: aquamarine;
+    border: 2px solid black;
+    border-radius: 5px;
+    overflow-y:scroll;
+/*    transition: 1s;*/
+    /*transition-delay: 1s;*/
+    transition-duration: 1s;
+    font-size:17px;
+    font-family: Verdana, Geneva, sans-serif;
+}
+#savecurrentloc{
+    position: absolute;
+    bottom:15%;
+    right:35%;
+}
+#nearme{
+    top:0%;
+    left:0px;
+    position: absolute;
+    height:90%;
+    width:25%;
+    background-color: aquamarine;
+    border: 2px solid black;
+    border-radius: 5px;
+    overflow-y:scroll;
+    display:block;
+    font-size:17px;
+    font-family: Verdana, Geneva, sans-serif;
+/*    transition: 2s;
+    transition-delay: 0.5s;*/
+    transition-duration: 1s;
 }
